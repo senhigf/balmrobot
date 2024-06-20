@@ -1,8 +1,9 @@
 #define speed 80
 #define ajusteA 15
-#define ajusteB 10
-#define ajusteC 0
+#define ajusteB 8
+#define ajusteC 5
 #define ajusteD 1
+
 
 
 //Parar
@@ -30,10 +31,10 @@ void foward() {
   digitalWrite(BackLeftWheel_Backwards, LOW);
   digitalWrite(BackLeftWheel_Foward, HIGH); 
 
-  analogWrite(ENB, speed);
-  analogWrite(ENA, speed);
-  analogWrite(ENC, speed);
-  analogWrite(END, speed);  
+  analogWrite(ENA, speed + propA);
+  analogWrite(ENB, speed + propB);
+  analogWrite(ENC, speed + propC);
+  analogWrite(END, speed + propD);  
 }
 //Trás
 void backwards() {
@@ -86,7 +87,7 @@ void LeftTurning() {
 }
 
 //Lados diagonal
-void LeftDiagonally(){
+void LeftDiagonal(){
   digitalWrite(FontRightWheel_Foward, HIGH);   // turn the LED off by making the voltage LOW
   digitalWrite(FrontRightWheel_Backwards, LOW);   // turn the LED off by making the voltage LOW
   digitalWrite(FrontLeftwheel_Foward, LOW);   // turn the LED off by making the voltage LOW
@@ -103,7 +104,7 @@ void LeftDiagonally(){
 
 }
 
-void RightDiagonally(){
+void RightDiagonal(){
   digitalWrite(FontRightWheel_Foward, LOW);   // turn the LED off by making the voltage LOW
   digitalWrite(FrontRightWheel_Backwards, LOW);   // turn the LED off by making the voltage LOW
   digitalWrite(FrontLeftwheel_Foward, HIGH);   // turn the LED off by making the voltage LOW
@@ -199,7 +200,7 @@ void LeftCrabWalk(){
   digitalWrite(BackLeftWheel_Backwards, LOW);   // turn the LED off by making the voltage LOW
 
   analogWrite(ENB, speed);
-  analogWrite(ENA, speed - ajusteA);
+  analogWrite(ENA, speed + ajusteB);
   analogWrite(ENC, speed);
   analogWrite(END, speed + ajusteD);
 }
@@ -214,8 +215,9 @@ void RightCrabWalk(){
   digitalWrite(BackLeftWheel_Foward, LOW);   // turn the LED off by making the voltage LOW
   digitalWrite(BackLeftWheel_Backwards, HIGH);   // turn the LED off by making the voltage LOW
 
-  analogWrite(ENB, speed);
-  analogWrite(ENA, speed - ajusteA);
+  analogWrite(ENB, speed + ajusteB);
+  analogWrite(ENA, speed);
   analogWrite(ENC, speed);
   analogWrite(END, speed + ajusteD);
+
 }
