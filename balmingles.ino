@@ -13,16 +13,27 @@
 #define END 9 //tras direito (ENA) 
 
 // definição dos sensores
-#define sensorD 2 // roxo
-#define sensorCD 1 // azul 
-#define sensorCE 3 // cinza
-#define sensorE 0 // verde
+#define sensorD A2 // roxo
+#define sensorCD A1 // azul 
+#define sensorCE A3 // cinza
+#define sensorE A0 // verde
 // the setup function runs once when you press reset or power the board
+
 int sleft, scenterleft, scenterright, sright;
+ int white = 200;
+ int black = 850;
+
+
+int propA = 0;
+int propB = 0;
+int propC = 0;
+int propD = 0;
+
+
 
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(FontRightWheel_Foward, OUTPUT);
   pinMode(FrontRightWheel_Backwards, OUTPUT);
   pinMode(FrontLeftwheel_Foward, OUTPUT);
@@ -44,60 +55,19 @@ void setup() {
   
 }
 
- int white = 150;
- int black = 250;
+
 
  
 void loop() {
- lerSensores();
-/*
- Serial.print(sleft);
-  Serial.print(" - ");
-  Serial.print(scenterleft);
-  Serial.print(" - ");
-  Serial.print(scenterright);
-  Serial.print(" - ");
-  Serial.println(sright);
-*/
-
-  if (scenterleft <white  && scenterright <white && sleft <white  && sright <white ) {
-      foward();
-  }
-  if (scenterleft >black && scenterright <black && sleft >black && sright >black) {
-      foward();
-  }
-  if (scenterleft >black && scenterright <white && sleft <white  && sright <white ) {
-      LeftCrabWalk();
-  }
-  if (scenterleft <white && scenterright >black && sleft <white  && sright <white ) {
-      RightCrabWalk();
-  }
-  /*if (scenterleft >black && sleft >black && sright <white ) {
-    LeftSpinningFast();
-  }
-  if (scenterleft <white  && sleft <white  && sright >black) {
-    RightSpinningFast();
-  }*/
-  else {
-    foward();
-    }
-
+  linha();
+  lerSensores();
+ mostrarSensores();
+    
+delay(500);
 }
-
-void lerSensores(){
-  sleft = analogRead(sensorE);
- // delay(10);
-  scenterleft = analogRead(sensorCE);
- /// delay(10);
-  scenterright  = analogRead(sensorCD);
- ///// delay(10);
-  sright = analogRead(sensorD);
- ///////// delay(10);
-}
-/*
-void loop() {
-lerSensores();
-mostrarSensores();*/
+ /*
+ void loop() {
+// lerSensores();
+// mostrarSensores();*/
 // HIGH + HIGH = quando os dois forem pretos o robo continua a andar 
 // LOW + LOW = quando os dois forem brancos o robo continua a andar 
-
